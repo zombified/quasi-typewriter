@@ -1,0 +1,41 @@
+{
+  "name": "Typer",
+  "short_name": "Typer",
+  "description": "a tool for writing, not editing, that puts you in control, doesn't bother you with anything, and is digitally ephemeral.",
+  "icons": [
+    {
+      "src": "icons/literature512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/literature256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/literature128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/literature64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/literature32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/literature16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/typer.html",
+  "display": "fullscreen",
+  "theme_color": "cornsilk",
+  "background_color": "whitesmoke"
+}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quasi-Typewriter</title>
+    <link rel="manifest" href="quasitypewriter.webmanifest" />
+    <link rel="shortcut icon" type="image/png" href="icons/literature32.png" />
+<style type='text/css'>
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+}
+body {
+  font-family: "Courier New", monospace;
+}
+
+#aboutlink {
+  display: block;
+  position: absolute;
+  top: 0.05in;
+  right: 0.25in;
+  font-style: italic;
+  color: dimgrey;
+}
+#aboutpanel {
+  display: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: gray;
+  z-index: 100000;
+}
+#abouttext {
+  white-space: pre;
+  padding-top: 0.25in;
+  width: 8.5in;
+  height: 11in;
+  background-color: cornsilk;
+  margin: 0 auto;
+  opacity: 100%;
+}
+
+#workablearea {
+  background-color: white;
+
+  height: 11in;
+  width: 8.5in;
+  margin: 0 auto;
+  padding: 0;
+}
+#pagearea {
+  margin: 0 0.25in;
+  position: relative;
+  top: 0.25in;
+  width: 8in;
+  height: 10.5in;
+
+  white-space: pre;
+  font-size: 12pt;
+  line-height: 0.1666666666in;
+}
+#inchheightarea {
+  display: none;
+  position: absolute;
+  top: 0;
+  height: 1in;
+  width: 100%;
+  background-color: yellow;
+  opacity: 50%;
+}
+
+#highlightline {
+  position: absolute;
+  top: 0.25in;
+  left: 0;
+  width: 100%;
+}
+#pageline {
+  width: 8.5in;
+  margin: 0 auto;
+}
+#writeline {
+  background-color: cornsilk;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+
+  width: 8in;
+  margin: 0 auto;
+  height: 0.1666666666in;
+  overflow: hidden;
+  padding: .03in .01in;
+}
+
+@media print {
+  #aboutlink { display: none; }
+  #highlightline { display: none; }
+}
+
+@page {
+  size: 8.5in 11in;
+}
+</style>
+  </head>
+  <body id='body'>
+    <a href='#' id='aboutlink'>i</a>
+    <div id='aboutpanel'>
+      <div id='abouttext'>
+      This is Quasi-Typewriter.
+
+      There are 3 goals for this tool:
+
+        1. words should be written with this tool, not edited.
+        2. the tool should not request or demand attention.
+        3. to the extent a digital tool can, it should encourage physicallity
+
+      It is not a word processor.
+      It is not a text editor.
+      It is not a typewriter simulator.
+      It is not some attempt at minimalism.
+      It will not organize files.
+      It will not count words.
+      It will not time your writing.
+      It will not save anything for you.
+      It does not track you or analyze you.
+      It will never know anything about you.
+
+      It is a tool, you are it's operator.
+
+      command+p or ctrl+p: print dialog (print to pdf or printer, etc)
+      command+r or ctrl+r: new page (all unprinted or uncopied work will be lost)
+      command+f or ctrl+f: fullscreen (escape to exit)
+      escape: close the info page
+
+      note - with the browser print dialog, be wary of configured margin's. Quasi-Typewriter
+      styles the page with 0.25in margin's on all sides by default, and if the
+      browser's margin's are configured differently, text might wrap in
+      unexpected ways.
+
+      <a href="https://www.flaticon.com/free-icons/typewriter" title="typewriter icons">Typewriter icons created by Freepik - Flaticon</a>
+      </div>
+    </div>
+
+    <div id='workablearea'><div id='pagearea'><div id='inchheightarea'></div></div></div>
+    <div id='highlightline'><div id='pageline'>
+        <div id='writeline' contenteditable='plaintext-only' spellcheck='false'></div>
+    </div></div>
+
+<script>
+
+  let aboutlink = document.getElementById('aboutlink');
+  let aboutpanel = document.getElementById('aboutpanel');
+  aboutlink.addEventListener('click', function(e) {
+    e.preventDefault();
+    aboutpanel.style.display = 'block';
+  });
+
+  let body = document.getElementById('body');
+  body.addEventListener('keydown', function(e) {
+    if(e.key === 'Escape') {
+      aboutpanel.style.display = 'none';
+    }
+    else if(e.key === 'f' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault()
+      body.requestFullscreen({'navigationUI': 'hide'});
+    }
+  });
+
+  let highlightline = document.getElementById('highlightline');
+  let writeline = document.getElementById('writeline');
+  let workablearea = document.getElementById('workablearea');
+  let page = document.getElementById('pagearea');
+
+  let ribbonpos = 0.25;
+
+  writeline.addEventListener('keydown', function(e) {
+      let txtline = writeline.textContent;
+      txtline = txtline.replace(/(\r\n|\n|\r)/gm, "");
+
+      if(e.key === "Enter") {
+          if((ribbonpos + 0.1666666666) >= (11 - 0.1666666666)) {
+              // TODO: new page ? hide highlight line until a new page is
+              // created in some way
+            highlightline.style.display = 'none';
+          }
+          else {
+            writeline.textContent = "";
+            page.innerHTML = page.innerHTML + txtline + "<br/>";
+            ribbonpos += 0.1666666666;
+            highlightline.style.top = ribbonpos + "in";
+          }
+      }
+      // NOTE: these statements serve a purpose -- they prevent the key from
+      // becoming unusable when the length is more than 79 characters
+      else if(e.key === "Escape") {}
+      else if(e.key === "ArrowLeft") {}
+      else if(e.key === "ArrowRight") {}
+      else if(e.key === "End") {}
+      else if(e.key === "Home") {}
+      else if(e.key === "Backspace") {}
+      else if(e.key === "Clear") {}
+      else if(e.key === "Cut") {}
+      else if(e.key === "Copy") {}
+      else if(e.key === "Delete") {}
+      else if(txtline.length >= 79) {
+          e.preventDefault();
+      }
+  });
+</script>
+  </body>
+</html>
