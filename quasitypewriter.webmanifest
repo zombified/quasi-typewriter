@@ -1,6 +1,6 @@
 {
-  "name": "Typer",
-  "short_name": "Typer",
+  "name": "Quasi-Typewriter",
+  "short_name": "Quasi-Type",
   "description": "a tool for writing, not editing, that puts you in control, doesn't bother you with anything, and is digitally ephemeral.",
   "icons": [
     {
@@ -34,7 +34,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/typer.html",
+  "start_url": "./index.html",
   "display": "fullscreen",
   "theme_color": "cornsilk",
   "background_color": "whitesmoke"
