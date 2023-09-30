@@ -117,11 +117,11 @@ body {
       It is not a word processor.
       It is not a text editor.
       It is not a typewriter simulator.
-      It is not some attempt at minimalism.
+      It is not an attempt at 'minimalism'.
       It will not organize files.
       It will not count words.
       It will not time your writing.
-      It will not save anything for you.
+      It will not save the document for you.
       It does not track you or analyze you.
       It will never know anything about you.
 
@@ -130,19 +130,25 @@ body {
       command+p or ctrl+p: print dialog (print to pdf or printer, etc)
       command+r or ctrl+r: new page (all unprinted or uncopied work will be lost)
       command+f or ctrl+f: fullscreen (escape to exit)
-      escape: close the info page
+      escape or command+e or ctrl+e: close the info page
 
       note - with the browser print dialog, be wary of configured margin's.
       Quasi-Typewriter styles the page with 0.25in margin's on all sides by
       default, and if the browser's margin's are configured differently, text
       might wrap in unexpected ways.
 
+      also note: session storage is used to keep a copy of the committed work
+      until the tab or browser is closed, or command/ctrl+r is used. This is to
+      allow usage on devices or browsers that can be easily refreshed
+      unintentionally.
+
       <a href="https://joelkleier.com/quasi-typewriter/">joelkleier.com/quasi-typewriter/</a>
 
       <a href="https://github.com/zombified/quasi-typewriter">Source Code</a> (Note, you could just save this index file to have a working
       version of the app)
 
-      <a href="https://www.flaticon.com/free-icons/typewriter" title="typewriter icons">Typewriter icons created by Freepik - Flaticon</a>
+      <center><a href="https://www.flaticon.com/free-icons/typewriter" title="typewriter icons">Typewriter icons created by Freepik - Flaticon</a></center>
+      <center>Quasi-Typerwriter uses <a href='https://github.com/zombified/quasi-typewriter/blob/master/LICENSE'>GNU General Public License v3.0</a><center>
       </div>
     </div>
 
@@ -165,9 +171,20 @@ body {
     if(e.key === 'Escape') {
       aboutpanel.style.display = 'none';
     }
+    else if(e.key === 'r' && (e.ctrlKey || e.metaKey)) {
+      window.sessionStorage.clear()
+    }
     else if(e.key === 'f' && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault()
+      e.preventDefault();
       body.requestFullscreen({'navigationUI': 'hide'});
+    }
+    else if(e.key === 'e' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      aboutpanel.style.display = 'none';
+    }
+    else if(e.key === 'i' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      aboutpanel.style.display = 'block';
     }
   });
 
@@ -176,7 +193,18 @@ body {
   let workablearea = document.getElementById('workablearea');
   let page = document.getElementById('pagearea');
 
-  let ribbonpos = 0.25;
+  var ribbonpos;
+  if(window.sessionStorage.getItem('ribbonpos') === null) {
+    ribbonpos = 0.25;
+  }
+  else {
+    ribbonpos = parseFloat(window.sessionStorage.getItem('ribbonpos'));
+    highlightline.style.top = ribbonpos + "in";
+  }
+
+  if(window.sessionStorage.getItem('page.innerHTML') !== null) {
+    page.innerHTML = window.sessionStorage.getItem('page.innerHTML');
+  }
 
   writeline.addEventListener('keydown', function(e) {
       let txtline = writeline.textContent;
@@ -193,6 +221,9 @@ body {
             page.innerHTML = page.innerHTML + txtline + "<br/>";
             ribbonpos += 0.1666666666;
             highlightline.style.top = ribbonpos + "in";
+
+            window.sessionStorage.setItem("ribbonpos", ribbonpos);
+            window.sessionStorage.setItem("page.innerHTML", page.innerHTML);
           }
       }
       // NOTE: these statements serve a purpose -- they prevent the key from
