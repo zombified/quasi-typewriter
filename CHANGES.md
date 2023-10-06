@@ -5,6 +5,7 @@ Quasi-Typewriter
 ------------------
 
 - autofocus writeline
+- add visual center guide under ribbon
 
 
 1.0.1 (2023-09-30)

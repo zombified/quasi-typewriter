@@ -92,6 +92,12 @@ body {
   overflow: hidden;
   padding: .03in .01in;
 }
+#centerguide {
+  height: 10px;
+  border-left: 1px solid lightblue;
+  position: relative;
+  left: 4.25in;
+}
 
 @media print {
   #aboutlink { display: none; }
@@ -155,7 +161,8 @@ body {
 
     <div id='workablearea'><div id='pagearea'><div id='inchheightarea'></div></div></div>
     <div id='highlightline'><div id='pageline'>
-        <div id='writeline' contenteditable='plaintext-only' spellcheck='false'></div>
+      <div id='writeline' contenteditable='plaintext-only' spellcheck='false'></div>
+      <div id='centerguide'></div>
     </div></div>
 
 <script>
