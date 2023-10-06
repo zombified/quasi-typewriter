@@ -1,7 +1,7 @@
 Quasi-Typewriter
 ================
 
-(unreleased)
+1.0.2 (2023-10-05)
 ------------------
 
 - autofocus writeline
