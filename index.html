@@ -43,7 +43,6 @@ body {
 
 #workablearea {
   background-color: white;
-  background-image: url("./marker.svg");
 
   height: 11in;
   width: 8.5in;
@@ -97,6 +96,7 @@ body {
   border-left: 1px solid lightblue;
   position: relative;
   left: 4.25in;
+  width: 5.25in;
 }
 
 @media print {
@@ -180,7 +180,9 @@ body {
       aboutpanel.style.display = 'none';
     }
     else if(e.key === 'r' && (e.ctrlKey || e.metaKey)) {
-      window.sessionStorage.clear()
+      e.preventDefault();
+      window.sessionStorage.clear();
+      location.reload();
     }
     else if(e.key === 'f' && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
@@ -250,6 +252,15 @@ body {
           e.preventDefault();
       }
   });
+
+  // FF doesn't do "plaintext-only' yet, if ever
+  writeline.setAttribute('contenteditable', 'PLAINTEXT-ONLY');
+  // if property gets switched to inherit or something after setting
+  // attribute, it's not supported, so make it at least 'true' so
+  // the writeline still functions
+  if(writeline.contentEditable !== 'plaintext-only') {
+      writeline.setAttribute('contenteditable', 'true');
+  }
 
   writeline.focus();
 </script>

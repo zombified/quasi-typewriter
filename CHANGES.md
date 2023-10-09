@@ -1,6 +1,15 @@
 Quasi-Typewriter
 ================
 
+1.0.3 (unreleased)
+------------------
+
+- removed bad reference to unused svg file
+- ctrl+r / cmd+r fixed to force reload after session clear
+- fix center guide element width
+- fix compatibility with ff for writeline
+
+
 1.0.2 (2023-10-05)
 ------------------
 
