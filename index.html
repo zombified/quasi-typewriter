@@ -166,6 +166,7 @@ body {
     </div></div>
 
 <script>
+  let MAX_LINE_LENGTH = 79;
 
   let aboutlink = document.getElementById('aboutlink');
   let aboutpanel = document.getElementById('aboutpanel');
@@ -221,23 +222,34 @@ body {
       txtline = txtline.replace(/(\r\n|\n|\r)/gm, "");
 
       if(e.key === "Enter") {
-          if((ribbonpos + 0.1666666666) >= (11 - 0.1666666666)) {
-              // TODO: new page ? hide highlight line until a new page is
-              // created in some way
-            highlightline.style.display = 'none';
-          }
-          else {
-            writeline.textContent = "";
-            page.innerHTML = page.innerHTML + txtline + "<br/>";
-            ribbonpos += 0.1666666666;
-            highlightline.style.top = ribbonpos + "in";
+        if((ribbonpos + 0.1666666666) >= (11 - 0.1666666666)) {
+            // TODO: new page ? hide highlight line until a new page is
+            // created in some way
+          highlightline.style.display = 'none';
+        }
+        else {
+          writeline.textContent = "";
+          page.innerHTML = page.innerHTML + txtline + "<br/>";
+          ribbonpos += 0.1666666666;
+          highlightline.style.top = ribbonpos + "in";
 
-            window.sessionStorage.setItem("ribbonpos", ribbonpos);
-            window.sessionStorage.setItem("page.innerHTML", page.innerHTML);
-          }
+          window.sessionStorage.setItem("ribbonpos", ribbonpos);
+          window.sessionStorage.setItem("page.innerHTML", page.innerHTML);
+        }
+      }
+      else if(e.key === "Tab") {
+        e.preventDefault();
+
+        if((writeline.textContent.length + 4) <= MAX_LINE_LENGTH) {
+          writeline.textContent += "    ";  // 1 tab = 4 spaces
+
+          document.execCommand('selectAll', false, null);
+          document.getSelection().collapseToEnd();
+        }
       }
       // NOTE: these statements serve a purpose -- they prevent the key from
-      // becoming unusable when the length is more than 79 characters
+      // becoming unusable when the length is more than MAX_LINE_LENGTH
+      // characters
       else if(e.key === "Escape") {}
       else if(e.key === "ArrowLeft") {}
       else if(e.key === "ArrowRight") {}
@@ -248,7 +260,7 @@ body {
       else if(e.key === "Cut") {}
       else if(e.key === "Copy") {}
       else if(e.key === "Delete") {}
-      else if(txtline.length >= 79) {
+      else if(txtline.length >= MAX_LINE_LENGTH) {
           e.preventDefault();
       }
   });

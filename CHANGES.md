@@ -1,7 +1,13 @@
 Quasi-Typewriter
 ================
 
-1.0.3 (unreleased)
+1.0.4 (2023-10-11)
+------------------
+
+- tab key inside ribbon now inserts 4 spaces
+
+
+1.0.3 (2023-10-09)
 ------------------
 
 - removed bad reference to unused svg file
