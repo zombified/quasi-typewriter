@@ -138,10 +138,13 @@ body {
       command+r or ctrl+r: new page (all unprinted or uncopied work will be lost)
       command+f or ctrl+f: fullscreen (escape to exit)
       escape or command+e or ctrl+e: close the info page
+      command+a or ctrl+a in ribbon: go to beginning of line
+      command+e or ctrl+e in ribbon: go to end of line
+      tab in ribbon: insert 4 spaces
 
       note - with the browser print dialog, be wary of configured margin's.
       Quasi-Typewriter styles the page with 0.25in margin's on all sides by
-      default, and if the browser's margin's are configured differently, text
+      default, and if the printer's margin's are configured differently, text
       might wrap in unexpected ways.
 
       also note: session storage is used to keep a copy of the committed work
@@ -221,7 +224,19 @@ body {
       let txtline = writeline.textContent;
       txtline = txtline.replace(/(\r\n|\n|\r)/gm, "");
 
-      if(e.key === "Enter") {
+      if(e.key === 'e' && (e.ctrlKey || e.metaKey)) {
+          e.preventDefault();
+          writeline.focus();
+          document.execCommand('selectAll', false, null);
+          document.getSelection().collapseToEnd();
+      }
+      if(e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+          e.preventDefault();
+          writeline.focus();
+          document.execCommand('selectAll', false, null);
+          document.getSelection().collapseToStart();
+      }
+      else if(e.key === "Enter") {
         if((ribbonpos + 0.1666666666) >= (11 - 0.1666666666)) {
             // TODO: new page ? hide highlight line until a new page is
             // created in some way

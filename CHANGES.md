@@ -1,6 +1,14 @@
 Quasi-Typewriter
 ================
 
+1.0.5 (unreleased)
+------------------
+
+- cmd/ctrl+a in ribbon to move to beginning of line
+- cmd/ctrl+e in ribbon to move to end of line
+- minor alterations to about page
+
+
 1.0.4 (2023-10-11)
 ------------------
 
