@@ -1,7 +1,7 @@
 Quasi-Typewriter
 ================
 
-1.0.5 (unreleased)
+1.0.5 (2023-10-15)
 ------------------
 
 - cmd/ctrl+a in ribbon to move to beginning of line
