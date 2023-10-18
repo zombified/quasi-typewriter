@@ -256,7 +256,7 @@ body {
         e.preventDefault();
 
         if((writeline.textContent.length + 4) <= MAX_LINE_LENGTH) {
-          writeline.textContent += "    ";  // 1 tab = 4 spaces
+          writeline.textContent = txtline + "    ";  // 1 tab = 4 spaces
 
           document.execCommand('selectAll', false, null);
           document.getSelection().collapseToEnd();

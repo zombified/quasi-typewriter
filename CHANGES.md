@@ -1,6 +1,12 @@
 Quasi-Typewriter
 ================
 
+1.0.6 (2023-10-18)
+------------------
+
+- fix Tab inserting 4 spaces after newline
+
+
 1.0.5 (2023-10-15)
 ------------------
 
