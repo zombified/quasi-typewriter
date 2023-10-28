@@ -61,3 +61,10 @@ cmd-f (or ctrl-f) will request full screen, and drop away all UI if the browser
 allows it.
 
 And that's it.
+
+
+TODO
+----
+
+- [ ] verticle center mark on left or right side of sheet like on the
+      ribbon might be a good visual guide. might be too much too, should experiment

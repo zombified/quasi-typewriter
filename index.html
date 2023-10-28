@@ -256,10 +256,13 @@ body {
         e.preventDefault();
 
         if((writeline.textContent.length + 4) <= MAX_LINE_LENGTH) {
-          writeline.textContent = txtline + "    ";  // 1 tab = 4 spaces
-
-          document.execCommand('selectAll', false, null);
-          document.getSelection().collapseToEnd();
+          let selection = window.getSelection();
+          let range = selection.getRangeAt(0);
+          range.deleteContents();
+          let node = document.createTextNode("    ");  // 1 tab = 4 spaces
+          range.insertNode(node);
+          // move to the end of the "tab" (4 spaces)
+          selection.modify("move", "right", "character");
         }
       }
       // NOTE: these statements serve a purpose -- they prevent the key from
