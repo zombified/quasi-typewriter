@@ -1,7 +1,7 @@
 Quasi-Typewriter
 ================
 
-1.0.7 (unreleased)
+1.0.7 (2023-10-30)
 ------------------
 
 - fix Tab insertion at selection
